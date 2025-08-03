@@ -2,6 +2,19 @@ import { filterFaqs, toggleFaq } from '../function.js';
 
 export default function faqComponent() {
   return {
+    init() {
+      // 從 localStorage 讀取之前保存的分類
+      const savedCategory = localStorage.getItem('faq-category')
+      if(savedCategory) {
+        this.$store.faqStore.currentCategory = savedCategory
+      }
+
+      // 監聽分類變化並保存
+      this.$watch('$store.faqStore.currentCategory', (value) => {
+        localStorage.setItem('faq-category', value)
+      })
+    },
+
     faqs: [
       { question: '什麼是 Alpine.js？', answer: 'Alpine.js 是一個輕量級的 JavaScript 框架，用於在 HTML 中添加互動性。',category: '技術', isOpen: false },
       { question: 'Alpine.js 有什麼優點？', answer: '輕量級、易學習、無需編譯、可以漸進式採用，適合為現有專案添加互動性。',category: '技術', isOpen: false },
