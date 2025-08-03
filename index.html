@@ -8,14 +8,11 @@
   <script type="module" src="app.js"></script>
 </head>
 <body>
-  <div x-data="{ faqs: [
-      { question: '什麼是 Alpine.js？', answer: '111', isOpen: false },
-      { question: 'Alpine.js 有什麼優點？', answer: '222', isOpen: false },
-      { question: '如何學習 Alpine.js？', answer: '333', isOpen: false }
-    ] }" class="max-w-2xl mx-auto mt-8 space-y-4">
-    <template x-for="faq in faqs">
+  <div x-data="faqComponent()" class="max-w-2xl mx-auto mt-8 space-y-4">
+    <input type="text" x-model="searchTerm" placeholder="搜尋 FAQ..." class="w-full p-3 border border-gray-300 rounded-lg mb-6">
+    <template x-for="faq in filteredFaqs">
       <div class="border border-gray-200 rounded-lg overflow-hidden">
-        <h3 @click="faq.isOpen = !faq.isOpen" class="bg-gray-50 px-6 py-4 cursor-pointer hover:bg-gray-100 transition-colors duration-200 flex justify-between items-center">
+        <h3 @click="toggle(faq)" class="bg-gray-50 px-6 py-4 cursor-pointer hover:bg-gray-100 transition-colors duration-200 flex justify-between items-center">
           <span x-text="faq.question"></span>
           <span x-text="faq.isOpen ? '▲' : '▼'"></span>
         </h3>
