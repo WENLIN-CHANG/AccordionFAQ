@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="style.css">
+  <script type="module" src="app.js"></script>
+</head>
+<body>
+  <div x-data="{ isOpen: false}">
+    <h3 @click="isOpen = !isOpen">什麼是 Alpine.js？</h3>
+    <p x-show="isOpen" x-transition>Alpine.js 是一個輕量級的 JavaScript 框架，用於在 HTML 中添加互動性。</p>
+  </div>
+</body>
+</html>
