@@ -8,9 +8,17 @@
   <script type="module" src="app.js"></script>
 </head>
 <body>
-  <div x-data="{ isOpen: false}">
-    <h3 @click="isOpen = !isOpen">什麼是 Alpine.js？</h3>
-    <p x-show="isOpen" x-transition>Alpine.js 是一個輕量級的 JavaScript 框架，用於在 HTML 中添加互動性。</p>
+  <div x-data="{ faqs: [
+      { question: '什麼是 Alpine.js？', answer: '111', isOpen: false },
+      { question: 'Alpine.js 有什麼優點？', answer: '222', isOpen: false },
+      { question: '如何學習 Alpine.js？', answer: '333', isOpen: false }
+    ] }">
+    <template x-for="faq in faqs">
+      <div>
+        <h3 @click="faq.isOpen = !faq.isOpen" x-text="faq.question"></h3>
+        <p x-show="faq.isOpen" x-transition x-text="faq.answer"></p>
+      </div>
+    </template>
   </div>
 </body>
 </html>
