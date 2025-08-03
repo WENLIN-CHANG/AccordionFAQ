@@ -8,6 +8,7 @@ export default function faqComponent() {
       { question: '如何學習 Alpine.js？', answer: '從官方文檔開始，做一些小專案練習，理解響應式資料和指令的使用方式。',category: '學習', isOpen: false }
     ],
     searchTerm: '',
+    currentIndex: -1,
 
     get filteredFaqs() {
       return filterFaqs(this.faqs, this.searchTerm, this.$store.faqStore.currentCategory)
@@ -15,6 +16,28 @@ export default function faqComponent() {
 
     toggle(faq) {
       toggleFaq(this.faqs, faq)
-    }
+    },
+
+    closeAll() {
+      this.faqs.forEach(faq => faq.isOpen = false)
+    },
+
+    navigateUp() {
+      if(this.currentIndex > 0) {
+        this.currentIndex --
+      }
+    },
+
+    navigateDown() {
+      if(this.currentIndex < this.filteredFaqs.length - 1) {
+        this.currentIndex ++
+      }
+    },
+
+    toggleCurrent() {
+      if(this.currentIndex >= 0) {
+        this.toggle(this.filteredFaqs[this.currentIndex])
+      }
+    },
   }
 }
