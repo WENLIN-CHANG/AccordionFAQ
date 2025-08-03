@@ -10,6 +10,9 @@
 <body>
   <div x-data="faqComponent()"
       @keydown.escape="closeAll()"
+      @keydown.arrow-up.prevent="navigateUp()"
+      @keydown.arrow-down.prevent="navigateDown()"
+      @keydown.enter="toggleCurrent()"
       tabindex="0"
       class="max-w-2xl mx-auto mt-8 space-y-4">
     <input type="text" x-model="searchTerm" placeholder="搜尋 FAQ..." class="w-full p-3 border border-gray-300 rounded-lg mb-6">
@@ -23,8 +26,10 @@
         </button>
       </template>
     </div>
-    <template x-for="faq in filteredFaqs">
-      <div class="border border-gray-200 rounded-lg overflow-hidden">
+    <template x-for="(faq, index) in filteredFaqs" :key="index">
+      <div
+        :class="index === currentIndex ? 'ring-2 ring-blue-500' : ''" 
+        class="border border-gray-200 rounded-lg overflow-hidden">
         <h3 @click="toggle(faq)" class="bg-gray-50 px-6 py-4 cursor-pointer hover:bg-gray-100 transition-colors duration-200 flex justify-between items-center">
           <span x-text="faq.question"></span>
           <span x-text="faq.isOpen ? '▲' : '▼'"></span>
