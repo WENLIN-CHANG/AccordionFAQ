@@ -10,6 +10,16 @@
 <body>
   <div x-data="faqComponent()" class="max-w-2xl mx-auto mt-8 space-y-4">
     <input type="text" x-model="searchTerm" placeholder="搜尋 FAQ..." class="w-full p-3 border border-gray-300 rounded-lg mb-6">
+    <div class="flex gap-2 mb-4">
+      <template x-for="category in $store.faqStore.categories">
+        <button
+          @click="$store.faqStore.currentCategory = category"
+          :class="$store.faqStore.currentCategory === category ? 'bg-blue-500 text-white' : 'bg-gray-200'"
+          x-text="category"
+          class="px-4 py-2 rounded-lg">
+        </button>
+      </template>
+    </div>
     <template x-for="faq in filteredFaqs">
       <div class="border border-gray-200 rounded-lg overflow-hidden">
         <h3 @click="toggle(faq)" class="bg-gray-50 px-6 py-4 cursor-pointer hover:bg-gray-100 transition-colors duration-200 flex justify-between items-center">

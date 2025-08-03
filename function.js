@@ -10,13 +10,19 @@ export function toggleFaq(faqs, targetFaq) {
   }
 }
 
-export function filterFaqs(faqs, searchTerm) {
-  if(searchTerm === "") {
-    return faqs
+export function filterFaqs(faqs, searchTerm, currentCategory = '全部') {
+  let filtered = faqs
+
+  if(currentCategory !== '全部'){
+    filtered = filtered.filter(faq => faq.category === currentCategory)
   }
 
-  return faqs.filter(faq =>
-    faq.question.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    faq.answer.toLowerCase().includes(searchTerm.toLowerCase())
-  );
+  if(searchTerm !== "") {
+    filtered = filtered.filter(faq =>
+      faq.question.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      faq.answer.toLowerCase().includes(searchTerm.toLowerCase())
+    )
+  }
+
+  return filtered
 }
