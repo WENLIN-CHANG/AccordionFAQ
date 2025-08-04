@@ -3,6 +3,10 @@ import { filterFaqs, toggleFaq } from '../function.js';
 export default function faqComponent() {
   return {
     init() {
+      setTimeout(() => {
+        this.isLoading = false
+      },1500)
+
       // 從 localStorage 讀取之前保存的分類
       const savedCategory = localStorage.getItem('faq-category')
       if(savedCategory) {
@@ -22,6 +26,8 @@ export default function faqComponent() {
     ],
     searchTerm: '',
     currentIndex: -1,
+    isLoading: true,
+    loadingText: '載入中...',
 
     get filteredFaqs() {
       return filterFaqs(this.faqs, this.searchTerm, this.$store.faqStore.currentCategory)

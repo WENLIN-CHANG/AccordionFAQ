@@ -27,7 +27,15 @@
         </button>
       </template>
     </div>
-    <div x-show="true"
+    <!-- 載入中的狀態 -->
+    <div 
+      x-show="isLoading"
+      x-transition
+      class="text-center py-8">
+      <div class="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-500 mx-auto mb-4"></div>
+      <p x-text="loadingText" class="text-gray-600"></p>
+    </div>
+    <div x-show="!isLoading"
          x-transition:enter="transition-all duration-500 ease-out"
          x-transition:enter-start="opacity-0 transform translate-x-4"
          x-transition:enter-end="opacity-100 transform translate-x-0"
