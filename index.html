@@ -49,9 +49,15 @@
         <div
           :class="index === currentIndex ? 'ring-2 ring-blue-500' : ''" 
           class="border border-gray-200 rounded-lg overflow-hidden">
-          <h3 @click="toggle(faq)" class="bg-gray-50 px-6 py-4 cursor-pointer hover:bg-gray-100 transition-colors duration-200 flex justify-between items-center">
+          <h3 
+            @click="animateToggle(faq)" 
+            :class="faq.isAnimating ? 'scale-95' : 'scale-100'"
+            class="bg-gray-50 px-6 py-4 cursor-pointer hover:bg-gray-100 transition-colors duration-200 flex justify-between items-center">
             <span x-text="faq.question"></span>
-            <span x-text="faq.isOpen ? '▲' : '▼'"></span>
+            <span 
+              x-text="faq.isOpen ? '▲' : '▼'"
+              :class="faq.isAnimating ? 'rotate-180' : ''"
+              class="transition-transform duration-300"></span>
           </h3>
           <p x-show="faq.isOpen"
              x-transition:enter="transition ease-out duration-300"

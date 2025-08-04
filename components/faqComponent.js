@@ -24,9 +24,9 @@ export default function faqComponent() {
     },
 
     faqs: [
-      { question: '什麼是 Alpine.js？', answer: 'Alpine.js 是一個輕量級的 JavaScript 框架，用於在 HTML 中添加互動性。',category: '技術', isOpen: false },
-      { question: 'Alpine.js 有什麼優點？', answer: '輕量級、易學習、無需編譯、可以漸進式採用，適合為現有專案添加互動性。',category: '技術', isOpen: false },
-      { question: '如何學習 Alpine.js？', answer: '從官方文檔開始，做一些小專案練習，理解響應式資料和指令的使用方式。',category: '學習', isOpen: false }
+      { question: '什麼是 Alpine.js？', answer: 'Alpine.js 是一個輕量級的 JavaScript 框架，用於在 HTML 中添加互動性。',category: '技術', isOpen: false, isAnimating: false },
+      { question: 'Alpine.js 有什麼優點？', answer: '輕量級、易學習、無需編譯、可以漸進式採用，適合為現有專案添加互動性。',category: '技術', isOpen: false, isAnimating: false },
+      { question: '如何學習 Alpine.js？', answer: '從官方文檔開始，做一些小專案練習，理解響應式資料和指令的使用方式。',category: '學習', isOpen: false, isAnimating: false }
     ],
     searchTerm: '',
     currentIndex: -1,
@@ -61,6 +61,17 @@ export default function faqComponent() {
       if(this.currentIndex >= 0) {
         this.toggle(this.filteredFaqs[this.currentIndex])
       }
+    },
+
+    animateToggle(faq) {
+      // 先觸發動畫效果
+      faq.isAnimating = true
+
+      // 延遲切換狀態，製造更自然的動畫
+      setTimeout(() => {
+        this.toggle(faq)
+        faq.isAnimating = false
+      },100)
     },
   }
 }
