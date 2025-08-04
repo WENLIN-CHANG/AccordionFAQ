@@ -11,6 +11,12 @@
   <div x-data="faqComponent()"
        x-init="init()"
        x-cloak
+       x-effect="if (searchTerm.trim() && searchTerm.length >= 2) {
+        if(!searchHistory.includes(searchTerm.trim())) {
+          searchHistory.unshift(searchTerm.trim());
+          if(searchHistory.length > 10) searchHistory.pop()
+        }
+       }"
       @faq-opened="handleFaqOpened($event)"
       @keydown.escape="closeAll()"
       @keydown.arrow-up.prevent="navigateUp()"
@@ -54,6 +60,22 @@
         </button>
       </template>
     </div>
+
+    <div x-show="searchHistory.length > 0 && searchTerm.length === 0"
+         x-transition
+         class="bg-gray-50 border border-gray-200 rounded-lg p-3 mb-4">
+      <h4 class="text-sm font-medium text-gray-700 mb-2">🔍 最近搜尋</h4>
+      <div class="flex flex-wrap gap-2">
+        <template x-for="term in searchHistory.slice(0, 5)">
+          <button @click="searchTerm = term"
+                  class="text-xs bg-white border border-gray-300 rounded-full px-3 py-1 hover:bg-gray-100 
+  transition-colors">
+            <span x-text="term"></span>
+          </button>
+        </template>
+      </div>
+    </div>
+
     <!-- 載入中的狀態 -->
     <div 
       x-show="isLoading"

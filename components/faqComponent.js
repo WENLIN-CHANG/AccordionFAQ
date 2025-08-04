@@ -34,6 +34,7 @@ export default function faqComponent() {
     isLoading: true,
     loadingText: '載入中...',
     openHistory: [],
+    searchHistory: [],
 
     get filteredFaqs() {
       return filterFaqs(this.faqs, this.searchTerm, this.$store.faqStore.currentCategory)
