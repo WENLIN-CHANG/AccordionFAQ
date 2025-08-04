@@ -10,6 +10,7 @@
 <body>
   <div x-data="faqComponent()"
        x-init="init()"
+       x-cloak
       @keydown.escape="closeAll()"
       @keydown.arrow-up.prevent="navigateUp()"
       @keydown.arrow-down.prevent="navigateDown()"
