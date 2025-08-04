@@ -16,7 +16,12 @@
       @keydown.enter="toggleCurrent()"
       tabindex="0"
       class="max-w-2xl mx-auto mt-8 space-y-4">
-    <input type="text" x-model="searchTerm" placeholder="搜尋 FAQ..." class="w-full p-3 border border-gray-300 rounded-lg mb-6">
+    <input 
+      type="text" 
+      x-model="searchTerm"
+      x-ref="searchInput" 
+      placeholder="搜尋 FAQ..." 
+      class="w-full p-3 border border-gray-300 rounded-lg mb-6">
     <div class="flex gap-2 mb-4">
       <template x-for="category in $store.faqStore.categories">
         <button

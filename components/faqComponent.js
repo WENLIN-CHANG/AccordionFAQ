@@ -5,6 +5,10 @@ export default function faqComponent() {
     init() {
       setTimeout(() => {
         this.isLoading = false
+        // 載入完成後自動聚焦搜尋框
+        this.$nextTick(() => {
+          this.$refs.searchInput.focus()
+        })
       },1500)
 
       // 從 localStorage 讀取之前保存的分類
