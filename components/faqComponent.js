@@ -73,5 +73,14 @@ export default function faqComponent() {
         faq.isAnimating = false
       },100)
     },
+
+    // 在 return 物件中加入計算屬性
+    get hasNoResults() {
+      return this.filteredFaqs.length === 0 && this.searchTerm.trim() !== ''
+    },
+
+    get emptyMessage() {
+      return `找不到包含「${this.searchTerm}」的 FAQ`
+    },
   }
 }

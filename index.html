@@ -40,6 +40,15 @@
       <div class="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-500 mx-auto mb-4"></div>
       <p x-text="loadingText" class="text-gray-600"></p>
     </div>
+    <!-- 無搜尋結果的訊息 -->
+    <div
+      x-show="hasNoResults && !isLoading"
+      x-transition
+      class="text-center py-8 text-gray-500">
+      <div class="text-4xl mb-4">🤔</div>
+      <p x-text="emptyMessage" class="text-lg mb-2"></p>
+      <p class="text-sm">試試其他關鍵字或切換分類</p>
+    </div>
     <div x-show="!isLoading"
          x-transition:enter="transition-all duration-500 ease-out"
          x-transition:enter-start="opacity-0 transform translate-x-4"
