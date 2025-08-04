@@ -17,6 +17,14 @@
       @keydown.enter="toggleCurrent()"
       tabindex="0"
       class="max-w-2xl mx-auto mt-8 space-y-4">
+    <div x-ignore class="bg-yellow-100 border border-yellow-300 rounded-lg p-4 mb-6">
+      <h2 class="font-bold text-yellow-800">📢 廣告區域 (Alpine.js 不處理)</h2>
+      <p class="text-yellow-700">這裡的內容不會被 Alpine.js 處理</p>
+      <p>例如：x-text="這不會被解析" 和 {{ 這也不會被解析 }}</p>
+      <button onclick="alert('純 JavaScript 事件')" class="bg-yellow-500 text-white px-3 py-1 rounded mt-2">
+        點擊測試
+      </button>
+    </div>
     <input 
       type="text" 
       x-model="searchTerm"
