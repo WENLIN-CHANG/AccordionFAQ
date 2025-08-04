@@ -23,6 +23,7 @@ export default function faqComponent() {
       })
     },
 
+    // data
     faqs: [
       { question: '什麼是 Alpine.js？', answer: 'Alpine.js 是一個輕量級的 JavaScript 框架，用於在 HTML 中添加互動性。',category: '技術', isOpen: false, isAnimating: false },
       { question: 'Alpine.js 有什麼優點？', answer: '輕量級、易學習、無需編譯、可以漸進式採用，適合為現有專案添加互動性。',category: '技術', isOpen: false, isAnimating: false },
@@ -32,6 +33,7 @@ export default function faqComponent() {
     currentIndex: -1,
     isLoading: true,
     loadingText: '載入中...',
+    openHistory: [],
 
     get filteredFaqs() {
       return filterFaqs(this.faqs, this.searchTerm, this.$store.faqStore.currentCategory)
@@ -71,6 +73,15 @@ export default function faqComponent() {
       setTimeout(() => {
         this.toggle(faq)
         faq.isAnimating = false
+
+        // 如果 FAQ 被開啟，發送自定義事件
+        if(faq.isOpen) {
+          this.$dispatch('faq-opened', {
+            question: faq.question,
+            category: faq.category,
+            timestamp: new Date().toLocaleTimeString()
+          })
+        }
       },100)
     },
 
@@ -81,6 +92,21 @@ export default function faqComponent() {
 
     get emptyMessage() {
       return `找不到包含「${this.searchTerm}」的 FAQ`
+    },
+
+    // 在方法區域加入事件監聽處理
+    handleFaqOpened(event) {
+      // 記錄開啟歷史
+      this.openHistory.push({
+        question: event.detail.question,
+        category: event.detail.category,
+        time: event.detail.timestamp
+      })
+
+      // 只保留最近 5 筆記錄
+      if(this.openHistory.length > 5) {
+        this.openHistory.shift()
+      }
     },
   }
 }
